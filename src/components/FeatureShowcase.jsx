@@ -43,7 +43,7 @@ const showcases = [
   },
 ];
 
-/* ---------------- Upload Visual ---------------- */
+
 
 function UploadVisual() {
   return (
@@ -66,7 +66,7 @@ function UploadVisual() {
   );
 }
 
-/* ---------------- AI Analysis Visual ---------------- */
+
 
 function AIAnalysisVisual() {
   const steps = [
@@ -107,7 +107,7 @@ function AIAnalysisVisual() {
   );
 }
 
-/* ---------------- Verification Visual ---------------- */
+
 
 function VerificationVisual() {
   const sources = [
@@ -143,7 +143,7 @@ function VerificationVisual() {
   );
 }
 
-/* ---------------- Fraud Score Visual ---------------- */
+
 
 function ResultVisual() {
   return (
@@ -168,7 +168,6 @@ function ResultVisual() {
   );
 }
 
-/* ---------------- Main Component ---------------- */
 
 export default function FeatureShowcase() {
   const [active, setActive] = useState("upload");
@@ -192,7 +191,7 @@ export default function FeatureShowcase() {
           </h2>
         </motion.div>
 
-        {/* Tabs */}
+      
 
         <div className="flex justify-center mb-12">
           <div className="inline-flex p-1 rounded-xl bg-white/[0.04] border border-white/[0.07]">
@@ -219,7 +218,7 @@ export default function FeatureShowcase() {
           </div>
         </div>
 
-        {/* Content */}
+
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <AnimatePresence mode="wait">
