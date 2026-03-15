@@ -1,13 +1,17 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Check, Zap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { initiatePayment } from "../services/paymentService";
 
 const plans = [
   {
-    name: "Starter",
+    name: "Free",
     price: "Free",
+    planKey: "free",
     desc: "For students, individuals, and early experimentation.",
-    cta: "Start free",
+    cta: "Get free",
     features: [
       "10 document verifications / month",
       "Basic AI fraud detection",
@@ -16,12 +20,13 @@ const plans = [
       "Community support",
     ],
   },
-
   {
-    name: "Professional",
-    price: "$29",
+    name: "Pro",
+    price: "₹499",
+    priceSub: "/month",
+    planKey: "pro",
     desc: "For lawyers, startups, and small legal teams.",
-    cta: "Start free trial",
+    cta: "Buy plan",
     popular: true,
     features: [
       "500 document verifications / month",
@@ -33,12 +38,13 @@ const plans = [
       "Email support",
     ],
   },
-
   {
     name: "Enterprise",
-    price: "Custom",
+    price: "₹1,999",
+    priceSub: "/month",
+    planKey: "enterprise",
     desc: "For courts, banks, and government institutions.",
-    cta: "Contact sales",
+    cta: "Buy plan",
     features: [
       "Unlimited document verification",
       "Private blockchain audit trail",
@@ -54,6 +60,23 @@ const plans = [
 export default function Pricing() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const handlePlanClick = async (plan) => {
+    const key = plan.planKey || (plan.name === "Free" ? "free" : plan.name === "Pro" ? "pro" : "enterprise");
+    if (key === "free") {
+      navigate("/signup");
+      return;
+    }
+    try {
+      await initiatePayment(key, user?.email || "", () => {
+        navigate("/dashboard");
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <section className="py-24 relative" ref={ref} id="pricing">
@@ -108,12 +131,14 @@ export default function Pricing() {
 
                 <p className="text-[13px] text-white/40 mb-4">{plan.desc}</p>
 
-                <div className="text-[38px] font-bold text-white">
+                <div className="text-[38px] font-bold text-white flex items-baseline gap-1">
                   {plan.price}
+                  {plan.priceSub && <span className="text-[14px] font-normal text-white/50">{plan.priceSub}</span>}
                 </div>
               </div>
 
               <button
+                onClick={() => handlePlanClick(plan)}
                 className={`w-full py-2.5 rounded-lg text-[14px] font-semibold mb-6 transition-all ${
                   plan.popular
                     ? "bg-[#5c6ac4] hover:bg-[#4f5db5] text-white"

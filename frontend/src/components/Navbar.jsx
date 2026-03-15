@@ -83,9 +83,7 @@ export default function Navbar() {
             <div
               key={link.label}
               className="relative"
-              onMouseEnter={() =>
-                link.dropdown && setActiveDropdown(link.label)
-              }
+              onMouseEnter={() => link.dropdown && setActiveDropdown(link.label)}
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <Link
@@ -150,14 +148,14 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-3">
           <Link
-            to="#"
+            to="/login"
             className="text-[13.5px] font-medium text-white/50 hover:text-white px-3 py-2"
           >
             Log in
           </Link>
 
           <Link
-            to="#"
+            to="/signup"
             className="text-[13.5px] font-semibold text-black bg-white hover:bg-white/90 px-4 py-2 rounded-lg transition-all hover:scale-[1.03]"
           >
             Sign up
@@ -193,11 +191,17 @@ export default function Navbar() {
               ))}
 
               <div className="pt-4 mt-3 border-t border-white/[0.06] flex flex-col gap-2">
-                <Link className="py-2.5 text-[14px] font-medium text-white/60">
+                <Link
+                  to="/login"
+                  className="py-2.5 text-[14px] font-medium text-white/60"
+                >
                   Log in
                 </Link>
 
-                <Link className="py-2.5 text-[14px] font-semibold text-center text-black bg-white rounded-lg">
+                <Link
+                  to="/signup"
+                  className="py-2.5 text-[14px] font-semibold text-center text-black bg-white rounded-lg"
+                >
                   Sign up
                 </Link>
               </div>

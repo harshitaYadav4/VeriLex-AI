@@ -7,6 +7,12 @@ import Feature from "./pages/Feature";
 import PricingPage from "./pages/Pricing";
 import Changelog from "./pages/Changelog";
 import Demo from "./pages/Demo";
+import Auth from "./pages/Auth";
+import ApiDocs from "./pages/ApiDocs";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+import TestApi from "./pages/TestApi";
+import Payments from "./pages/Payments";
 
 function PageWrapper({ children }) {
   return (
@@ -35,6 +41,21 @@ function AppLayout() {
           <Route path="/pricing" element={<PageWrapper><PricingPage /></PageWrapper>} />
           <Route path="/changelog" element={<PageWrapper><Changelog /></PageWrapper>} />
           <Route path="/demo" element={<PageWrapper><Demo /></PageWrapper>} />
+          <Route path="/auth" element={<PageWrapper><Auth /></PageWrapper>} />
+          <Route path="/login" element={<PageWrapper><Auth initialMode="login" /></PageWrapper>} />
+          <Route path="/signup" element={<PageWrapper><Auth initialMode="signup" /></PageWrapper>} />
+          <Route path="/api-docs" element={<PageWrapper><ApiDocs /></PageWrapper>} />
+          <Route path="/docs" element={<PageWrapper><ApiDocs /></PageWrapper>} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <PageWrapper><Dashboard /></PageWrapper>
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/test-api" element={<PageWrapper><TestApi /></PageWrapper>} />
+          <Route path="/payments" element={<ProtectedRoute><PageWrapper><Payments /></PageWrapper></ProtectedRoute>} />
         </Routes>
       </AnimatePresence>
       {!isDemo && <Footer />}
