@@ -12,7 +12,6 @@ import Auth from "./Auth";
 import Dashboard from "./Dashboard";
 import ProtectedRoute from "../components/ProtectedRoute";
 
-
 export default function Home() {
   return (
     <main>
@@ -24,12 +23,10 @@ export default function Home() {
       <UseCases />
       <Pricing />
       <CTASection />
-      <ApiDocs/>
-      <Auth/>
-      <Dashboard/>
-      <ProtectedRoute/>
-
-      
+      <ApiDocs />
+      <Auth />
+      <Dashboard />
+      <ProtectedRoute />
     </main>
   );
 }
